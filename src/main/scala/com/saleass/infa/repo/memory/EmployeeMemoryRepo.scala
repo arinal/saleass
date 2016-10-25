@@ -8,19 +8,19 @@ import scala.util.{Failure, Success, Try}
 trait EmployeeMemoryRepo extends EmployeeRepository {
   lazy val map = mutable.Map.empty[Long, Employee]
 
-  def count = Success(map.size)
-  def byId(id: Long) = Success(map.get(id))
+  override def count = Success(map.size)
+  override def byId(id: Long) = Success(map.get(id))
 
-  def byCode(code: String): Try[Employee] =
+  override def byCode(code: String) =
     map.values.filter(_.code.equals(code)) match {
       case Seq(e) => Success(e)
       case _ => Failure(new Exception("Not found"))
     }
 
-  def nameLike(pattern: String): Try[Seq[Employee]] =
+  override def nameLike(pattern: String) =
     Success(map.values.filter(_.name.startsWith(pattern)).toSeq)
 
-  def store(entity: Employee): Try[Employee] = {
+  override def store(entity: Employee) = {
     map += (entity.id -> entity)
     Success(entity)
   }
