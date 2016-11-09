@@ -1,11 +1,9 @@
 package com.saleass.app
 
 import com.saleass.domain.interpreter._
-import com.saleass.infa.repo.memory.EmployeeMemoryRepo
+import com.saleass.infra.repo.memory.EmployeeMemoryRepo
 
 object Scratch extends App {
-
-  import com.lamedh.common.pattern.Syntax._
 
   val service = EmployeeService
   val createNew = for {
@@ -15,6 +13,6 @@ object Scratch extends App {
     e <- service.create
   } yield e
 
-  val employee = createNew(EmployeeMemoryRepo)
+  val employee = createNew.run(EmployeeMemoryRepo)
   println(employee)
 }

@@ -1,12 +1,13 @@
 package com.saleass.domain.algebra
 
-import scala.util.Try
+import scala.util.{Success, Try}
+import com.lamedh.common.pattern.Reader
 
 trait EmployeeService[Employee, EmployeeRepository] {
-  def create: EmployeeRepository => Try[Employee]
-  def count : EmployeeRepository => Try[Int]
-  def store(employee: Employee): EmployeeRepository => Try[Employee]
+  def create: Reader[EmployeeRepository, Try[Employee]]
+  def count: Reader[EmployeeRepository, Try[Int]]
+  def store(employee: Employee): Reader[EmployeeRepository, Try[Employee]]
 
-  def generateCode: EmployeeRepository => Try[String] =
-    (repo) => count(repo).map(c => s"E$c")
+  def generateCode: Reader[EmployeeRepository, Try[String]] =
+    for (c <- count) yield Success(s"E$c")
 }

@@ -2,7 +2,8 @@ package com.saleass.domain.interpreter
 
 import com.lamedh.common._
 
-case class Employee(id: Long, code: String, name: String, address: Address = Address("", "", "", "", ""))
+case class Employee(id: Long, code: String, name: String,
+                    address: Address = Address("", "", "", "", ""))
 
 trait EmployeeLenses {
   val codeLens = Lens[Employee, String](
