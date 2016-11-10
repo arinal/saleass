@@ -1,9 +1,10 @@
 package com.saleass.domain.interpreter.employee
 
-import com.lamedh.common._
+import com.lamedh.common.pattern.Lens
+import com.lamedh.common.domain.Entity
 
 case class Employee(id: Long, code: String, name: String,
-                    address: Address = Address("", "", "", "", ""))
+                    address: Address = Address("", "", "", "", "")) extends Entity[Long]
 
 trait EmployeeLenses {
   val codeLens = Lens[Employee, String](

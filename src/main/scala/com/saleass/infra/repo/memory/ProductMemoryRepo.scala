@@ -4,12 +4,9 @@ import com.saleass.domain.interpreter.product.{Product, ProductRepository}
 
 import scala.collection.mutable
 import scala.util.{Failure, Success, Try}
+import com.lamedh.common.infra.repo.MemoryRepo
 
-trait ProductMemoryRepo extends ProductRepository {
-  lazy val map = mutable.Map.empty[Long, Product]
-
-  override def count = Success(map.size)
-  override def byId(id: Long) = Success(map.get(id))
+trait ProductMemoryRepo extends MemoryRepo[Product] with ProductRepository {
 
   override def byCode(code: String) =
     map.values.filter(_.code.equals(code)) match {
@@ -19,11 +16,6 @@ trait ProductMemoryRepo extends ProductRepository {
 
   override def nameLike(pattern: String) =
     Success(map.values.filter(_.name.startsWith(pattern)).toSeq)
-
-  override def store(entity: Product) = {
-    map += (entity.id -> entity)
-    Success(entity)
-  }
 }
 
 object ProductMemoryRepo extends ProductMemoryRepo

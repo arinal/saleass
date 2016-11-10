@@ -1,4 +1,4 @@
-package com.lamedh.common
+package com.lamedh.common.domain
 
 import util.Try
 

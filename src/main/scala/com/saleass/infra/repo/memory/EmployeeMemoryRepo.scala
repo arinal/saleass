@@ -2,15 +2,11 @@ package com.saleass.infra.repo.memory
 
 import com.saleass.domain.interpreter.employee.{Employee, EmployeeRepository}
 
-import scala.collection.mutable
 import scala.util.{Failure, Success, Try}
+import com.lamedh.common.domain.{Entity, Repository}
+import com.lamedh.common.infra.repo.MemoryRepo
 
-trait EmployeeMemoryRepo extends EmployeeRepository {
-  lazy val map = mutable.Map.empty[Long, Employee]
-
-  override def count = Success(map.size)
-  override def byId(id: Long) = Success(map.get(id))
-
+trait EmployeeMemoryRepo extends MemoryRepo[Employee] with EmployeeRepository {
   override def byCode(code: String) =
     map.values.filter(_.code.equals(code)) match {
       case Seq(e) => Success(e)
@@ -19,11 +15,6 @@ trait EmployeeMemoryRepo extends EmployeeRepository {
 
   override def nameLike(pattern: String) =
     Success(map.values.filter(_.name.startsWith(pattern)).toSeq)
-
-  override def store(entity: Employee) = {
-    map += (entity.id -> entity)
-    Success(entity)
-  }
 }
 
 object EmployeeMemoryRepo extends EmployeeMemoryRepo

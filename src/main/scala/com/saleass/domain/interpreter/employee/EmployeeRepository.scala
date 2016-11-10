@@ -1,6 +1,6 @@
 package com.saleass.domain.interpreter.employee
 
-import com.lamedh.common.Repository
+import com.lamedh.common.domain.Repository
 
 import scala.util.Try
 

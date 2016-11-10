@@ -1,6 +1,6 @@
 package com.saleass.domain.interpreter.employee
 
-import com.lamedh.common.Lens
+import com.lamedh.common.pattern.Lens
 
 case class Address(no: String, street: String, city: String, state: String, zip: String)
 
