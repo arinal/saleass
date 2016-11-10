@@ -1,7 +1,8 @@
 package com.lamedh.common.domain
 
-import scala.util.{Success, Try}
 import com.lamedh.common.pattern.Reader
+
+import scala.util.Try
 
 trait EntityService[Entity, Repository] {
   def count: Reader[Repository, Try[Int]]

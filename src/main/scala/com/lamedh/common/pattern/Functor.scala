@@ -2,16 +2,16 @@ package com.lamedh.common.pattern
 
 import scala.language.{higherKinds, reflectiveCalls}
 
-trait Functor[F[_]] {
-  def map[A, B](fa: F[A])(f: A => B): F[B]
+trait Functor[M[_]] {
+  def map[A, B](ma: M[A])(f: A => B): M[B]
 }
 
 object Functor {
-  def apply[F[_]: Functor]: Functor[F] = implicitly[Functor[F]]
+  def apply[M[_]: Functor]: Functor[M] = implicitly[Functor[M]]
 
   implicit def ListFunctor: Functor[List] =
     new Functor[List] {
-      def map[A, B](fa: List[A])(f: (A) => B): List[B] = fa map f
+      def map[A, B](ma: List[A])(f: (A) => B): List[B] = ma map f
     }
 
   implicit def Tuple2Functor[A1]: Functor[({type f[x] = (A1, x)})#f] =
@@ -21,6 +21,6 @@ object Functor {
 
   implicit def Function1Functor[A1]: Functor[({type f[x] = (A1) => x})#f] =
     new Functor[({type f[x] = (A1) => x})#f] {
-      def map[A, B](fa: A1 => A)(f: A => B) = fa andThen f
+      def map[A, B](ma: A1 => A)(f: A => B) = ma andThen f
     }
 }

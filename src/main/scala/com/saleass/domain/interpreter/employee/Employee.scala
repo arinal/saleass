@@ -1,7 +1,7 @@
 package com.saleass.domain.interpreter.employee
 
-import com.lamedh.common.pattern.Lens
 import com.lamedh.common.domain.Entity
+import com.lamedh.common.pattern.Lens
 
 case class Employee(id: Long, code: String, name: String,
                     address: Address = Address("", "", "", "", "")) extends Entity[Long]

@@ -1,14 +1,13 @@
 package com.saleass.infra.repo.memory
 
-import com.saleass.domain.interpreter.employee.{Employee, EmployeeRepository}
-
-import scala.util.{Failure, Success, Try}
-import com.lamedh.common.domain.{Entity, Repository}
 import com.lamedh.common.infra.repo.MemoryRepo
+import com.saleass.domain.interpreter.employee.{Employee, EmployeeRepo}
 
-trait EmployeeMemoryRepo extends MemoryRepo[Employee] with EmployeeRepository {
+import scala.util.{Failure, Success}
+
+trait EmployeeMemoryRepo extends MemoryRepo[Employee] with EmployeeRepo {
   override def byCode(code: String) =
-    map.values.filter(_.code.equals(code)) match {
+    map.values.filter(_.code == code) match {
       case Seq(e) => Success(e)
       case _ => Failure(new Exception("Not found"))
     }

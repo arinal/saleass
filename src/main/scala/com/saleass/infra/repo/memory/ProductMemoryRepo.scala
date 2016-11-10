@@ -1,15 +1,14 @@
 package com.saleass.infra.repo.memory
 
-import com.saleass.domain.interpreter.product.{Product, ProductRepository}
-
-import scala.collection.mutable
-import scala.util.{Failure, Success, Try}
 import com.lamedh.common.infra.repo.MemoryRepo
+import com.saleass.domain.interpreter.product.{Product, ProductRepo}
 
-trait ProductMemoryRepo extends MemoryRepo[Product] with ProductRepository {
+import scala.util.{Failure, Success}
+
+trait ProductMemoryRepo extends MemoryRepo[Product] with ProductRepo {
 
   override def byCode(code: String) =
-    map.values.filter(_.code.equals(code)) match {
+    map.values.filter(_.code == code) match {
       case Seq(e) => Success(e)
       case _ => Failure(new Exception("Not found"))
     }

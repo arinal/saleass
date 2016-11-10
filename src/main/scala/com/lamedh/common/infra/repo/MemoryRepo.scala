@@ -1,8 +1,9 @@
 package com.lamedh.common.infra.repo
 
-import scala.util.Success
-import scala.collection.mutable
 import com.lamedh.common.domain.{Entity, Repository}
+
+import scala.collection.mutable
+import scala.util.Success
 
 trait MemoryRepo[E <: Entity[Long]] extends Repository[E, Long] {
   lazy val map = mutable.Map.empty[Long, E]

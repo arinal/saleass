@@ -1,9 +1,8 @@
 package com.saleass.app
 
-import com.saleass.domain.interpreter.employee._
-import com.saleass.domain.interpreter.product._
-import com.saleass.infra.repo.memory.EmployeeMemoryRepo
-import com.saleass.infra.repo.memory.ProductMemoryRepo
+import com.saleass.domain.interpreter.employee.{Employee, EmployeeService}
+import com.saleass.domain.interpreter.product.{Product, ProductService}
+import com.saleass.infra.repo.memory.{EmployeeMemoryRepo, ProductMemoryRepo}
 
 object Scratch extends App {
 
