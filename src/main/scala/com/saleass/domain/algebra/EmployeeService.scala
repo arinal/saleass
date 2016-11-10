@@ -9,5 +9,6 @@ trait EmployeeService[Employee, EmployeeRepository] {
   def store(employee: Employee): Reader[EmployeeRepository, Try[Employee]]
 
   def generateCode: Reader[EmployeeRepository, Try[String]] =
-    for (c <- count) yield Success(s"E$c")
+    for (tc <- count) yield
+      for (c <- tc) yield(s"E$c")
 }

@@ -1,18 +1,31 @@
 package com.saleass.app
 
-import com.saleass.domain.interpreter._
+import com.saleass.domain.interpreter.employee._
+import com.saleass.domain.interpreter.product._
 import com.saleass.infra.repo.memory.EmployeeMemoryRepo
+import com.saleass.infra.repo.memory.ProductMemoryRepo
 
 object Scratch extends App {
 
-  val service = EmployeeService
-  val createNew = for {
-    _ <- service.store(Employee(1, "E01", "Michael Suyama"))
-    _ <- service.store(Employee(2, "E02", "Nancy DaVolio"))
-    _ <- service.store(Employee(3, "E03", "David Buchanan"))
-    e <- service.create
+  val empService = EmployeeService
+  val createEmp = for {
+    _ <- empService.store(Employee(1, "E01", "Michael Suyama"))
+    _ <- empService.store(Employee(2, "E02", "Nancy DaVolio"))
+    _ <- empService.store(Employee(3, "E03", "David Buchanan"))
+    e <- empService.create
   } yield e
 
-  val employee = createNew.run(EmployeeMemoryRepo)
-  println(employee)
+  val prodService = ProductService
+  val createProd = for {
+    _ <- prodService.store(Product(1, "P01", "Momogi"))
+    _ <- prodService.store(Product(2, "P02", "Pepsi"))
+    _ <- prodService.store(Product(3, "P03", "Ajam"))
+    p <- prodService.create
+  } yield p
+
+  val e = createEmp.run(EmployeeMemoryRepo)
+  println(e)
+
+  val p = createProd.run(ProductMemoryRepo)
+  println(p)
 }

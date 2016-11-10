@@ -1,4 +1,4 @@
-package com.saleass.domain.interpreter
+package com.saleass.domain.interpreter.employee
 
 import com.lamedh.common.Lens
 
