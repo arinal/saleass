@@ -22,9 +22,11 @@ object Scratch extends App {
     p <- prodService.create
   } yield p
 
-  val e = createEmp.run(EmployeeMemoryRepo)
-  println(e)
-
-  val p = createProd.run(ProductMemoryRepo)
-  println(p)
+  for {
+    e <- createEmp.run(EmployeeMemoryRepo)
+    p <- createProd.run(ProductMemoryRepo)
+  } {
+    println(e)
+    println(p)
+  }
 }

@@ -8,5 +8,5 @@ import scala.util.Try
 trait EmployeeService[Employee, EmployeeRepo] extends EntityService[Employee, EmployeeRepo] {
   def generateCode: Reader[EmployeeRepo, Try[String]] =
     for (tc <- count) yield
-      for (c <- tc) yield s"E$c"
+      for (c <- tc) yield s"E${c + 1}"
 }

@@ -3,8 +3,8 @@ package com.lamedh.common.pattern
 import scala.language.{higherKinds, implicitConversions}
 
 object Syntax {
-  implicit class FunctorSyntax[F[_]: Functor, A](a: F[A]) {
-    def map[B](f: A => B) = Functor[F].map(a)(f)
+  implicit class FunctorSyntax[M[_]: Functor, A](a: M[A]) {
+    def map[B](f: A => B) = Functor[M].map(a)(f)
   }
 
   implicit class Function1FunctorSyntax[A1, A](a: (A1) => A) {
